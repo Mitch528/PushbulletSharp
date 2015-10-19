@@ -774,7 +774,8 @@ namespace PushbulletSharp
                 {
                     if (filter.ModifiedDate != null)
                     {
-                        string modifiedDateQueryString = string.Format("modified_after={0}", filter.ModifiedDate.DateTimeToUnixTime());
+                        string modifiedDate = filter.ModifiedDate.DateTimeToUnixTime().ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        string modifiedDateQueryString = string.Format("modified_after={0}", modifiedDate);
                         queryStringList.Add(modifiedDateQueryString);
                     }
 
@@ -782,6 +783,12 @@ namespace PushbulletSharp
                     {
                         string activeQueryString = string.Format("active={0}", (bool)filter.Active);
                         queryStringList.Add(activeQueryString);
+                    }
+
+                    if(filter.Limit > 0)
+                    {
+                        string limitQueryString = string.Format("limit={0}", filter.Limit);
+                        queryStringList.Add(limitQueryString);
                     }
                 }
 

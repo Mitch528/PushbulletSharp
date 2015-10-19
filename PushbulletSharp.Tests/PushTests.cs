@@ -262,7 +262,7 @@ namespace PushbulletSharp.Tests
             {
                 PushResponseFilter filter = new PushResponseFilter()
                 {
-                    ModifiedDate = new DateTime(2015, 8, 14),
+                    ModifiedDate = new DateTime(2015,10,15,20,10,40,32),
                     Active = true
                 };
                 var results = Client.GetPushes(filter);
@@ -335,6 +335,24 @@ namespace PushbulletSharp.Tests
                 var filter = new PushResponseFilter()
                 {
                     Email = "john.smith@aninternetwebsite.com"
+                };
+
+                var results = Client.GetPushes(filter);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void GetPushesWithLimit()
+        {
+            try
+            {
+                var filter = new PushResponseFilter()
+                {
+                    Limit = 1
                 };
 
                 var results = Client.GetPushes(filter);
